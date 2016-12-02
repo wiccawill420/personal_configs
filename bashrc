@@ -58,7 +58,6 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-#    PS1="\[\e[00;35m\]\u\[\e[0m\]\[\e[01;32m\]>\[\e[0m\]\[\e[01;35m\]\w\[\e[0m\]\[\e[01;32m\]>\[\e[0m\]\[\e[00;32m\]\\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 	PS1="\[\e[00;35m\]\A\[\e[0m\]\[\e[01;32m\]>\[\e[0m\]\[\e[01;35m\]\w\[\e[0m\]\[\e[01;32m\]>\[\e[0m\]\[\e[00;32m\]\\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -86,23 +85,17 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -ahlF'
-alias la='ls -A'
-alias lla='ls -lA'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+
+if [ -f ~/.bash_aliases_local ]; then
+    . ~/.bash_aliases_local
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -116,37 +109,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# William's Aliases
-alias skunk="ssh -A -i /home/william/.ssh/id_rsa skunkworks"
-shh() { ssh  -i /home/william/.ssh/id_rsa root@$@; }
-shd() { ssh  -i /home/william/.ssh/id_rsa root@10.101.$1.2 ${@:2}; }
-shs() { ssh  -i /home/william/.ssh/id_rsa root@10.101.$1.3 ${@:2}; }
-shc() { ssh  -i /home/william/.ssh/id_rsa root@cold$@; }
-#alias ssh="ssh -A"
-alias so="sudo -sH"
-alias fucking="sudo apt"
-alias fuck='sudo $(history -p \!\!)'
-alias fuckup="sudo apt update && sudo apt -y upgrade"
-alias new="konsole --separate --workdir pwd"
-alias serve="python -m SimpleHTTPServer"
-alias gitserv="ssh william@git.courtesycall.com"
-alias check="ps ax | grep -v grep | grep"
-
-# Surfraw Aliases
-alias wiki="sr wikipedia"
-alias define="sr webster"
-alias goog="sr google"
-alias urban="sr urban"
-alias lmgtfy="sr lmgtfy"
-
+# Make sure vim is the default editor because I am an adult
 export VISUAL=vim
 export EDITOR="$VISUAL"
+#Turn on FUCKING COLOR FOR LESS!!!!!!!!!!
+#Just have to apt install source-highlight once
+export LESS=" -R"
+export LESSOPEN="|/usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 
 ## Load ssh agent into keyring
 #eval `keychain --eval --quiet id_dsa`
-eval `keychain --eval id_rsa`
+eval `keychain -q --eval id_rsa`
 
-## Give us a little flavor, now with more flavor!
-#cat /home/william/motd
+## Give us a little flavor
 bash /home/william/colorsatan
-
