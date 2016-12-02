@@ -1,0 +1,31 @@
+# some more ls aliases
+alias ll='ls -ahlF'
+alias la='ls -A'
+alias lla='ls -lA'
+alias l='ls -CF'
+alias cd..='cd ..'
+
+
+# William's Aliases
+alias skunk="ssh -A -i /home/william/.ssh/id_rsa skunkworks"
+shh() { ssh -A -i /home/william/.ssh/id_rsa root@$@; }
+shd() { ssh -A -i /home/william/.ssh/id_rsa root@10.101.$1.2 ${@:2}; }
+shs() { ssh -A -i /home/william/.ssh/id_rsa root@10.101.$1.3 ${@:2}; }
+shc() { ssh -A -i /home/william/.ssh/id_rsa root@10.101.$@; }
+alias so="sudo -sH"
+alias fucking="sudo apt"
+alias fuck='sudo $(history -p \!\!)'
+alias fuckup="sudo apt update && sudo apt -y upgrade"
+alias new="konsole --separate --workdir pwd"
+alias serve="python -m SimpleHTTPServer"
+alias gitserv="ssh william@git.courtesycall.com"
+alias check="ps ax | grep -v grep | grep"
+alias ike="ssh -A -X william@10.10.0.214"
+
+# Surfraw Aliases
+alias wiki="sr wikipedia"
+alias define="sr webster"
+alias goog="sr google"
+alias urban="sr urban"
+alias lmgtfy="sr lmgtfy"
+
